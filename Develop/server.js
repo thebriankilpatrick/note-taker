@@ -24,7 +24,21 @@ app.get("/api/notes", function(req, res) {
     return res.json(notes);
 });
 
+let noteID = 0;
 
+app.post("/api/notes", function(req, res) {
+    const newNote = req.body;
+
+    noteID++;
+    newNote.id = noteID;
+
+    notes.push(newNote);
+    res.json(newNote);
+})
+
+app.delete("/api/notes/:id", function(req, res) {
+    res.send(req.body);
+})
 
 
 
