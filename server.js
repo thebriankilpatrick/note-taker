@@ -28,7 +28,7 @@ app.post("/api/notes", function(req, res) {
     const newNote = req.body;
 
     if (notes.length <= 0) {
-        const noteID = 0;
+        const noteID = 1;
         newNote.id = noteID;
     }
     else {
