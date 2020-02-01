@@ -12,7 +12,7 @@ can write, save, and delete notes.
 After navigating to the landing page, the user can then press the "Get Started" button, 
 as shown below, to begin saving notes.  
 
-
+![mainSnip](https://user-images.githubusercontent.com/43326943/73599632-8073f680-4513-11ea-94b9-a205b12c5369.PNG)  
 
 To create notes, the user must type in a note title along with some note text.  
 Once those have been typed, the user can simply click the save button at the top right-hand corner of the page.  
