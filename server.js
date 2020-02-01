@@ -1,9 +1,8 @@
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
-const util = require("util");
 
-const notes = require("../Develop/db/db.json");
+const notes = require("./db/db.json");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -24,10 +23,8 @@ app.get("/api/notes", function(req, res) {
     return res.json(notes);
 });
 
-console.log(notes);
-
+// Functionality for creating new notes
 app.post("/api/notes", function(req, res) {
-    // Find a way to make the note ID save
     const newNote = req.body;
     let i = notes.length - 1;
     let noteID = notes[i].id + 1;
@@ -36,27 +33,27 @@ app.post("/api/notes", function(req, res) {
 
     notes.push(newNote);
 
-    fs.writeFile("../Develop/db/db.json", JSON.stringify(notes), err => {
+    fs.writeFile("./db/db.json", JSON.stringify(notes), err => {
         if (err) throw err;
         res.json(newNote);
     });
 });
 
+// Functionality for deleting notes
 app.delete("/api/notes/:id", function(req, res) {
     const deleteID = parseInt(req.params.id);
     for (let i = 0; i < notes.length; i++) {
         if (deleteID === notes[i].id) {
-            console.log("It matches!");
+            console.log("Deleted selected note from json.db");
             notes.splice(i, 1);
         }
     }
-    console.log(notes);
-    fs.writeFile("../Develop/db/db.json", JSON.stringify(notes), err => {
+
+    fs.writeFile("./db/db.json", JSON.stringify(notes), err => {
         if (err) throw err;
         res.json(notes);
     });
 });
-
 
 
 app.listen(PORT, function() {
