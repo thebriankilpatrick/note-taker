@@ -21,7 +21,7 @@ To view a note, the user can simply click on the note he/she wishes to view on t
 
 To delete a note, the user can simply click on the trash button on the note he/she wishes to delete.  
 
-
+![noteSnip](https://user-images.githubusercontent.com/43326943/73599641-9a153e00-4513-11ea-9215-4491dbb5d199.PNG)  
 
 ### Credits  
 
