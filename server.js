@@ -26,10 +26,16 @@ app.get("/api/notes", function(req, res) {
 // Functionality for creating new notes
 app.post("/api/notes", function(req, res) {
     const newNote = req.body;
-    let i = notes.length - 1;
-    let noteID = notes[i].id + 1;
 
-    newNote.id = noteID;
+    if (notes.length <= 0) {
+        const noteID = 0;
+        newNote.id = noteID;
+    }
+    else {
+        const i = notes.length - 1;
+        const noteID = notes[i].id + 1;
+        newNote.id = noteID;
+    }
 
     notes.push(newNote);
 
