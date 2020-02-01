@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const util = require("util");
 
-const notes = require("../Develop/db/db.json")
+const notes = require("../Develop/db/db.json");
 
 const app = express();
 const PORT = 3001;
@@ -24,21 +24,38 @@ app.get("/api/notes", function(req, res) {
     return res.json(notes);
 });
 
-let noteID = 0;
+console.log(notes);
 
 app.post("/api/notes", function(req, res) {
+    // Find a way to make the note ID save
     const newNote = req.body;
+    let i = notes.length - 1;
+    let noteID = notes[i].id + 1;
 
-    noteID++;
     newNote.id = noteID;
 
     notes.push(newNote);
-    res.json(newNote);
-})
+
+    fs.writeFile("../Develop/db/db.json", JSON.stringify(notes), err => {
+        if (err) throw err;
+        res.json(newNote);
+    });
+});
 
 app.delete("/api/notes/:id", function(req, res) {
-    res.send(req.body);
-})
+    const deleteID = parseInt(req.params.id);
+    for (let i = 0; i < notes.length; i++) {
+        if (deleteID === notes[i].id) {
+            console.log("It matches!");
+            notes.splice(i, 1);
+        }
+    }
+    console.log(notes);
+    fs.writeFile("../Develop/db/db.json", JSON.stringify(notes), err => {
+        if (err) throw err;
+        res.json(notes);
+    });
+});
 
 
 
